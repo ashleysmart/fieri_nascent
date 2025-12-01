@@ -1,0 +1,18 @@
+services:
+  react_native_ubuntu24:
+    container_name: react_native_ubuntu24
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/workdir
+      - /dev/bus/usb:/dev/bus/usb
+    privileged: true
+    expose:
+      - 5037:5037
+      - 5353:5353
+    network_mode: host
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    command: bash
