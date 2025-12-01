@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ../:/workdir
+      - ../../:/workdir
       - /dev/bus/usb:/dev/bus/usb
     privileged: true
     expose:
