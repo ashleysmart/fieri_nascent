@@ -1,120 +1,144 @@
 [
   {
-    "id": "custom-miniature-character",
-    "title": "Custom Miniature Character Design",
-    "date": "2024-11-15",
-    "excerpt": "Creating detailed tabletop gaming miniatures with precision FDM printing.",
-    "thumbnail": "dnd_mini_20251202_1.jpg",
+    "id": "warhammer_kitbast_20250611",
+    "title": "Warhammer 40k kit bash - Dreadnoughts",
+    "date": "2025-06-11",
+    "excerpt": "Warhammer 40k kit bash Dreadnoughts",
+    "thumbnail": "kitbashing_20251201_1.jpg",
     "sections": [
       {
         "type": "header",
-        "content": "The Challenge"
+        "content": "Warhammer 40k kit bash - Dreadnoughts"
       },
       {
         "type": "text",
-        "content": "This project involved creating a custom character miniature for a tabletop RPG campaign. The client provided high-resolution STL files with intricate details that would test the limits of our FDM printing capabilities."
+        "content": "A set of grey wolf dreadnought kitbash parts. Done in grey resin"
       },
       {
         "type": "image",
-        "filename": "dnd_mini_20251202_1.jpg",
-        "caption": "Initial STL file preview"
-      },
-      {
-        "type": "subheader",
-        "content": "Technical Approach"
+        "filename": "kitbashing_20251201_4.jpg",
+        "caption": "The STL parts laided out"
       },
       {
         "type": "text",
-        "content": "We achieved incredible detail at 0.1mm layer height. The model featured intricate armor details and a dynamic pose that required careful support placement. Our slicer settings were optimized for maximum detail while maintaining structural integrity."
-      },
-      {
-        "type": "subheader",
-        "content": "Post-Processing"
-      },
-      {
-        "type": "text",
-        "content": "Post-processing included careful removal of supports and light sanding to achieve a smooth finish ready for painting. The client was thrilled with the level of detail preserved in the final print."
+        "content": "Once the high quaility STL has been aquired and checked we can start the printing process"
       },
       {
         "type": "image",
-        "filename": "dnd_mini_20251202_1.jpg",
-        "caption": "Final printed miniature"
+        "filename": "kitbashing_20251201_5.jpg",
+        "caption": "Drip drying and draining the excess resin."
+      },
+      {
+        "type": "image",
+        "filename": "kitbashing_20251201_6.jpg",
+        "caption": "UV curing the prints."
+      },
+
+      {
+        "type": "text",
+        "content": "Once the high quaility STL has been aquired and checked we can start the printing process"
+      },
+      {
+        "type": "image",
+        "filename": "kitbashing_20251201_1.jpg",
+        "caption": "Final Set of kit bash parts"
+      },
+
+      {
+        "type": "text",
+        "content": "Some images showing the up close detail that a resin print can achieve"
+      },
+      {
+        "type": "image",
+        "filename": "kitbashing_20251201_2.jpg",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "filename": "kitbashing_20251201_3.jpg",
+        "caption": ""
       }
     ]
   },
   {
-    "id": "functional-prototype",
-    "title": "Functional Prototype Development",
-    "date": "2024-11-08",
-    "excerpt": "Engineering a working prototype for a mechanical assembly component.",
-    "thumbnail": "dnd_mini_20251202_1.jpg",
+    "id": "warhammer_kitbast_20250606",
+    "title": "Warhammer 40k kit bash",
+    "date": "2025-06-06",
+    "excerpt": "Warhammer 40k kit bash guns",
+    "thumbnail": "kitbashing_20251202_1.jpg",
     "sections": [
       {
         "type": "header",
-        "content": "Project Overview"
+        "content": "Warhammer 40K - Kit bashing"
       },
       {
         "type": "text",
-        "content": "An engineering client needed a functional prototype for testing fit and assembly in a larger mechanical system. The part had to withstand real-world testing conditions and interface perfectly with existing components."
+        "content": "Warhammer 40K - Kit bashing- Space Marine alternative guns. Printed in grey resin"
       },
       {
         "type": "image",
-        "filename": "dnd_mini_20251202_1.jpg",
+        "filename": "kitbashing_20251202_1.jpg",
         "caption": "CAD design of the prototype"
       },
       {
-        "type": "subheader",
-        "content": "Material Selection"
-      },
-      {
-        "type": "text",
-        "content": "We printed this part in ABS for its superior strength and heat resistance. The material choice was critical for the prototype to accurately represent the final production part's behavior."
-      },
-      {
-        "type": "subheader",
-        "content": "Iterative Process"
-      },
-      {
-        "type": "text",
-        "content": "The project required multiple iterations to perfect the tolerances, but the final result fit perfectly into the assembly. This prototype saved the client weeks of development time and significant costs compared to traditional manufacturing methods."
+        "type": "image",
+        "filename": "kitbashing_20251202_2.jpg",
+        "caption": "Printed Result"
       }
     ]
   },
   {
-    "id": "artistic-sculpture",
-    "title": "Artistic Sculpture Commission",
-    "date": "2024-10-22",
-    "excerpt": "Bringing a digital art piece into the physical world through resin printing.",
+    "id": "dnd_minis_2025_06",
+    "title": "D&d mini set 2025-06",
+    "date": "2025-06-25",
+    "excerpt": "D&D gamers mini set",
     "thumbnail": "dnd_mini_20251202_1.jpg",
     "sections": [
       {
         "type": "header",
-        "content": "Artistic Vision"
+        "content": "D&d mini set"
       },
       {
         "type": "text",
-        "content": "A local artist commissioned us to print their digital sculpture design. The piece was conceived as a purely digital artwork but the artist wanted to see it realized in physical form for gallery exhibition."
+        "content": "This set of minis was done in elegoo grey resin and base coated with vallejo black base paint."
+      },
+      {
+        "type": "subheader",
+        "content": "Hero Squad samples"
       },
       {
         "type": "image",
         "filename": "dnd_mini_20251202_1.jpg",
-        "caption": "Digital sculpture model"
+        "caption": "Hero mini - Teifling cleric"
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_3.jpg",
+        "caption": "Hero mini - Dragonborn paladin"
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_4.jpg",
+        "caption": "Hero mini - Orc barbarian"
       },
       {
         "type": "subheader",
-        "content": "Resin Printing Excellence"
+        "content": "Goblin squad samples"
       },
       {
-        "type": "text",
-        "content": "Using resin printing, we were able to capture every nuance of their creative vision. The translucent resin gave the piece an ethereal quality, and the 0.025mm layer resolution meant that surface details were flawless."
+        "type": "image",
+        "filename": "dnd_mini_20251202_2.jpg",
+        "caption": "Goblin mini - Solider"
       },
       {
-        "type": "subheader",
-        "content": "Final Result"
+        "type": "image",
+        "filename": "dnd_mini_20251202_5.jpg",
+        "caption": "Hero mini - Darts man"
       },
       {
-        "type": "text",
-        "content": "The artist was thrilled with how their digital creation translated into a physical art piece that could be displayed in galleries. The sculpture has since been featured in several local exhibitions."
+        "type": "image",
+        "filename": "dnd_mini_20251202_6.jpg",
+        "caption": "Hero mini - archer"
       }
     ]
   }

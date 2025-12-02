@@ -16,9 +16,6 @@ export default function FieriNascent() {
 
   useEffect(() => {
     // In production, this would fetch from actual JSON files:
-    // fetch('/content/site.json').then(res => res.json()).then(data => setContent(data));
-    // fetch('/content/features.json')...
-    // fetch('/content/blog.json')...
     fetch(process.env.PUBLIC_URL + '/content.json')
       .then(res => res.json())
       .then(data => setContent(data));
@@ -105,8 +102,6 @@ export default function FieriNascent() {
     <>
       <section className="hero">
         <div className="container">
-          <img src={process.env.PUBLIC_URL + '/dnd_mini_20251202_1.jpg'} alt=""/>
-
           <img src={logo} alt="" className="large_logo"/>
           <h1 className="hero-title">
              Small Scale<br />3D Print Foundry
@@ -152,25 +147,38 @@ export default function FieriNascent() {
     </>
   );
 
+  const renderGalleryImage = (post, filename, caption) => (
+    <div
+      key={post.id}
+      className="gallery-item"
+      onClick={() => openBlogPost(post)}
+    >
+      <img src={imagePublicUrl(filename)} alt={post.title} />
+      <div className="gallery-overlay">
+        <div className="gallery-title">{post.title}</div>
+        <div className="gallery-subtitle">{caption}</div>
+      </div>
+    </div>
+  );
+
+  const renderGallerySection = (post) => {
+    // {renderGalleryImage(post, post.thumbnail)}
+    return (<>
+      {post.sections.map((section, index) => {
+        if (section.type == "image") {
+          return renderGalleryImage(post, section.filename, section.caption)
+        }
+        return null
+      })}
+    </>)
+  };
+
   const renderGallery = () => (
     <section className="section">
       <div className="container">
-        <h2 className="section-title">Sample Prints</h2>
-        <p className="section-subtitle">Completed projects</p>
-
         <div className="gallery">
           {blogPosts.map((post) => (
-            <div
-              key={post.id}
-              className="gallery-item"
-              onClick={() => openBlogPost(post)}
-            >
-              <img src={imagePublicUrl(post.thumbnail)} alt={post.title} />
-              <div className="gallery-overlay">
-                <div className="gallery-title">{post.title}</div>
-              </div>
-            </div>
-          ))}
+            renderGallerySection(post, post.thumbnail)))}
         </div>
       </div>
     </section>
@@ -189,10 +197,6 @@ export default function FieriNascent() {
               <div className="blog-detail-header">
                 <div className="blog-date">{selectedBlog.date}</div>
                 <h1 className="blog-detail-title">{selectedBlog.title}</h1>
-              </div>
-
-              <div className="blog-detail-image">
-                <img src={imagePublicUrl(selectedBlog.thumbnail)} alt={selectedBlog.title} />
               </div>
 
               <div className="blog-detail-content">

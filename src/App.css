@@ -279,10 +279,12 @@ body {
   inset: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   padding: 2rem;
   opacity: 0;
   transition: opacity 0.4s ease;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .gallery-item:hover .gallery-overlay {
