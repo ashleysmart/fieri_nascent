@@ -165,7 +165,7 @@ export default function FieriNascent() {
     // {renderGalleryImage(post, post.thumbnail)}
     return (<>
       {post.sections.map((section, index) => {
-        if (section.type == "image") {
+        if (section.type === "image") {
           return renderGalleryImage(post, section.filename, section.caption)
         }
         return null
