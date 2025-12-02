@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from './logo.svg';
 
 const styles = `
   * {
@@ -236,12 +237,182 @@ const styles = `
     font-weight: 300;
   }
 
-  /* Gallery */
-  .gallery {
+  /* Logo */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .large_logo {
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+  }
+
+  /* Blog */
+  .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2px;
     background: rgba(255, 255, 255, 0.06);
+  }
+
+  .blog-card {
+    background: #0a0a0a;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .blog-card:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .blog-image {
+    aspect-ratio: 4/3;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .blog-content {
+    padding: 2rem;
+  }
+
+  .blog-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1rem;
+  }
+
+  .blog-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .blog-excerpt {
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+    font-weight: 300;
+  }
+
+  .blog-detail {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-detail-header {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .blog-detail-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .blog-detail-image {
+    aspect-ratio: 16/9;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .blog-detail-content {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    padding: 0;
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+
+  .back-button:hover {
+    color: #ffffff;
+  }
+
+  /* Contact */
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .form-textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+
+  .form-submit {
+    width: 100%;
   }
 
   .gallery-item {
@@ -349,12 +520,71 @@ const styles = `
 export default function FieriNascent() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState('home');
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const navigation = [
     { name: 'Home', id: 'home' },
-    { name: 'FAQ', id: 'faq' },
     { name: 'Gallery', id: 'gallery' },
+    { name: 'Blog', id: 'blog' },
+    { name: 'FAQ', id: 'faq' },
+    { name: 'Contact', id: 'contact' },
     { name: 'Terms', id: 'terms' },
+  ];
+
+  const blogPosts = [
+    {
+      id: 'custom-miniature-character',
+      title: 'Custom Miniature Character Design',
+      date: '2024-11-15',
+      excerpt: 'Creating detailed tabletop gaming miniatures with precision FDM printing.',
+      image: 'Custom Figure',
+      content: 'This project involved creating a custom character miniature for a tabletop RPG campaign. Using high-resolution STL files provided by the client, we achieved incredible detail at 0.1mm layer height. The model featured intricate armor details and a dynamic pose that required careful support placement. Post-processing included careful removal of supports and light sanding to achieve a smooth finish ready for painting.'
+    },
+    {
+      id: 'functional-prototype',
+      title: 'Functional Prototype Development',
+      date: '2024-11-08',
+      excerpt: 'Engineering a working prototype for a mechanical assembly component.',
+      image: 'Prototype Part',
+      content: 'An engineering client needed a functional prototype for testing fit and assembly in a larger mechanical system. We printed this part in ABS for its superior strength and heat resistance. The project required multiple iterations to perfect the tolerances, but the final result fit perfectly into the assembly. This prototype saved the client weeks of development time and significant costs compared to traditional manufacturing methods.'
+    },
+    {
+      id: 'artistic-sculpture',
+      title: 'Artistic Sculpture Commission',
+      date: '2024-10-22',
+      excerpt: 'Bringing a digital art piece into the physical world through resin printing.',
+      image: 'Artistic Sculpture',
+      content: 'A local artist commissioned us to print their digital sculpture design. Using resin printing, we were able to capture every nuance of their creative vision. The translucent resin gave the piece an ethereal quality, and the 0.025mm layer resolution meant that surface details were flawless. The artist was thrilled with how their digital creation translated into a physical art piece that could be displayed in galleries.'
+    },
+    {
+      id: 'engineering-component',
+      title: 'Precision Engineering Component',
+      date: '2024-10-10',
+      excerpt: 'High-tolerance mechanical part for industrial application.',
+      image: 'Engineering Component',
+      content: 'This technical project required exceptional dimensional accuracy for an industrial client. The component needed to interface with existing machinery, so tolerances were critical. We used PETG for its excellent dimensional stability and strength. Multiple test prints and measurements ensured the final part met all specifications. The client successfully integrated the component into their production line.'
+    },
+    {
+      id: 'custom-tool',
+      title: 'Custom Workshop Tool',
+      date: '2024-09-28',
+      excerpt: 'Designing and printing a specialized tool for a unique workshop need.',
+      image: 'Functional Tool',
+      content: 'A hobbyist machinist needed a custom tool that wasn\'t available commercially. We worked together to refine the design, making several iterations to improve ergonomics and functionality. The final tool was printed in nylon for maximum durability and wear resistance. The client reported that the tool has become indispensable in their workshop and has held up perfectly through months of regular use.'
+    },
+    {
+      id: 'architectural-model',
+      title: 'Architectural Scale Model',
+      date: '2024-09-15',
+      excerpt: 'Creating a detailed scale model for architectural presentation.',
+      image: 'Miniature Model',
+      content: 'An architecture firm commissioned a 1:100 scale model of their building design for client presentations. The model required multiple parts printed at different scales to capture both overall form and fine details. We used a combination of white PLA for the structure and clear resin for window elements. The finished model helped the firm secure project approval and impressed their clients with its precision and detail.'
+    }
   ];
 
   const faqs = [
@@ -376,19 +606,40 @@ export default function FieriNascent() {
     }
   ];
 
-  const galleryImages = [
-    'Prototype Part',
-    'Custom Figure',
-    'Engineering Component',
-    'Artistic Sculpture',
-    'Functional Tool',
-    'Miniature Model',
-  ];
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    alert('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', message: '' });
+  };
+
+  const navigateToSection = (section) => {
+    setCurrentSection(section);
+    setSelectedBlog(null);
+    setMobileMenuOpen(false);
+  };
+
+  const openBlogPost = (post) => {
+    setSelectedBlog(post);
+    setCurrentSection('blog');
+  };
+
+  const galleryImages = blogPosts.map(post => ({
+    title: post.image,
+    blogId: post.id
+  }));
 
   const renderHome = () => (
     <>
       <section className="hero">
         <div className="container">
+          <img src={logo} className="large_logo"/>
           <h1 className="hero-title">
             Small Scale<br />3D Print Foundry
           </h1>
@@ -468,12 +719,130 @@ export default function FieriNascent() {
         <p className="section-subtitle">Completed projects</p>
 
         <div className="gallery">
-          {galleryImages.map((title, index) => (
-            <div key={index} className="gallery-item">
-              <div className="gallery-title">{title}</div>
+          {galleryImages.map((item, index) => (
+            <div
+              key={index}
+              className="gallery-item"
+              onClick={() => {
+                const post = blogPosts.find(p => p.id === item.blogId);
+                if (post) openBlogPost(post);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className="gallery-title">{item.title}</div>
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+
+  const renderBlog = () => {
+    if (selectedBlog) {
+      return (
+        <section className="section">
+          <div className="container-narrow">
+            <button onClick={() => setSelectedBlog(null)} className="back-button">
+              ← Back to Blog
+            </button>
+
+            <div className="blog-detail">
+              <div className="blog-detail-header">
+                <div className="blog-date">{selectedBlog.date}</div>
+                <h1 className="blog-detail-title">{selectedBlog.title}</h1>
+              </div>
+
+              <div className="blog-detail-image">
+                <div className="gallery-title">{selectedBlog.image}</div>
+              </div>
+
+              <div className="blog-detail-content">
+                {selectedBlog.content}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    return (
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Project Stories</h2>
+          <p className="section-subtitle">Detailed looks at our work</p>
+
+          <div className="blog-grid">
+            {blogPosts.map((post) => (
+              <div
+                key={post.id}
+                className="blog-card"
+                onClick={() => openBlogPost(post)}
+              >
+                <div className="blog-image">
+                  <div className="gallery-title">{post.image}</div>
+                </div>
+                <div className="blog-content">
+                  <div className="blog-date">{post.date}</div>
+                  <h3 className="blog-title">{post.title}</h3>
+                  <p className="blog-excerpt">{post.excerpt}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const renderContact = () => (
+    <section className="section">
+      <div className="container-narrow">
+        <h2 className="section-title">Get in Touch</h2>
+        <p className="section-subtitle">Let's discuss your next project</p>
+
+        <form onSubmit={handleFormSubmit} className="contact-form">
+          <div className="form-group">
+            <label htmlFor="name" className="form-label">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleFormChange}
+              className="form-input"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleFormChange}
+              className="form-input"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="message" className="form-label">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleFormChange}
+              className="form-textarea"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn form-submit">
+            Send Message
+          </button>
+        </form>
       </div>
     </section>
   );
@@ -521,13 +890,16 @@ export default function FieriNascent() {
         <nav className="nav">
           <div className="container">
             <div className="nav-inner">
-              <div className="nav-logo">Fieri Nascent®</div>
+              <div className="logo-container">
+                <img src={logo} className="logo"/>
+                <div className="nav-logo">Fieri Nascent®</div>
+              </div>
 
               <div className="nav-links">
                 {navigation.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => setCurrentSection(item.id)}
+                    onClick={() => navigateToSection(item.id)}
                     className={`nav-link ${currentSection === item.id ? 'active' : ''}`}
                   >
                     {item.name}
@@ -548,10 +920,7 @@ export default function FieriNascent() {
             {navigation.map((item) => (
               <button
                 key={item.id}
-                onClick={() => {
-                  setCurrentSection(item.id);
-                  setMobileMenuOpen(false);
-                }}
+                onClick={() => navigateToSection(item.id)}
                 className={`nav-link ${currentSection === item.id ? 'active' : ''}`}
               >
                 {item.name}
@@ -562,8 +931,10 @@ export default function FieriNascent() {
 
         <main>
           {currentSection === 'home' && renderHome()}
-          {currentSection === 'faq' && renderFAQ()}
           {currentSection === 'gallery' && renderGallery()}
+          {currentSection === 'blog' && renderBlog()}
+          {currentSection === 'faq' && renderFAQ()}
+          {currentSection === 'contact' && renderContact()}
           {currentSection === 'terms' && renderTerms()}
         </main>
 
