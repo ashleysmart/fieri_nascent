@@ -1,0 +1,55 @@
+{
+  "site": {
+    "name": "Fieri Nascent®"
+  },
+  "features": [
+    {
+      "title": "Technology",
+      "description": "State-of-the-art 3D printing equipment delivering precision and quality for every project."
+    },
+    {
+      "title": "Service",
+      "description": "Dedicated support for hobbyists and professionals throughout the Tokyo region."
+    },
+    {
+      "title": "Accessible",
+      "description": "Competitive pricing that makes 3D printing accessible for projects of all sizes."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What printing technologies do you use?",
+      "answer": "We primarily use FDM and resin printing technologies to accommodate various project needs."
+    },
+    {
+      "question": "What is the typical turnaround time?",
+      "answer": "Small projects typically take 3-5 business days. Larger or complex projects may require additional time."
+    },
+    {
+      "question": "What file formats do you accept?",
+      "answer": "We accept STL, OBJ, and 3MF file formats. If you have other formats, please contact us."
+    },
+    {
+      "question": "Do you offer design services?",
+      "answer": "We focus on printing services, but we can recommend trusted designers in the Tokyo area."
+    }
+  ],
+  "terms": [
+    {
+      "title": "Service Agreement",
+      "content": "By using our 3D printing services, you agree to provide files that do not infringe on copyright or intellectual property rights. All designs and files remain the property of the customer."
+    },
+    {
+      "title": "Payment Terms",
+      "content": "Payment is required before production begins. We accept various payment methods and will provide a detailed quote before starting any project."
+    },
+    {
+      "title": "Quality Guarantee",
+      "content": "We strive for excellence in every print. If there are any issues with print quality due to our error, we will reprint the item at no additional cost."
+    },
+    {
+      "title": "Turnaround Time",
+      "content": "Estimated turnaround times are provided as guidelines. Actual completion times may vary based on project complexity and current workload."
+    }
+  ]
+}

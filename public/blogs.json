@@ -1,0 +1,121 @@
+[
+  {
+    "id": "custom-miniature-character",
+    "title": "Custom Miniature Character Design",
+    "date": "2024-11-15",
+    "excerpt": "Creating detailed tabletop gaming miniatures with precision FDM printing.",
+    "thumbnail": "dnd_mini_20251202_1.jpg",
+    "sections": [
+      {
+        "type": "header",
+        "content": "The Challenge"
+      },
+      {
+        "type": "text",
+        "content": "This project involved creating a custom character miniature for a tabletop RPG campaign. The client provided high-resolution STL files with intricate details that would test the limits of our FDM printing capabilities."
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_1.jpg",
+        "caption": "Initial STL file preview"
+      },
+      {
+        "type": "subheader",
+        "content": "Technical Approach"
+      },
+      {
+        "type": "text",
+        "content": "We achieved incredible detail at 0.1mm layer height. The model featured intricate armor details and a dynamic pose that required careful support placement. Our slicer settings were optimized for maximum detail while maintaining structural integrity."
+      },
+      {
+        "type": "subheader",
+        "content": "Post-Processing"
+      },
+      {
+        "type": "text",
+        "content": "Post-processing included careful removal of supports and light sanding to achieve a smooth finish ready for painting. The client was thrilled with the level of detail preserved in the final print."
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_1.jpg",
+        "caption": "Final printed miniature"
+      }
+    ]
+  },
+  {
+    "id": "functional-prototype",
+    "title": "Functional Prototype Development",
+    "date": "2024-11-08",
+    "excerpt": "Engineering a working prototype for a mechanical assembly component.",
+    "thumbnail": "dnd_mini_20251202_1.jpg",
+    "sections": [
+      {
+        "type": "header",
+        "content": "Project Overview"
+      },
+      {
+        "type": "text",
+        "content": "An engineering client needed a functional prototype for testing fit and assembly in a larger mechanical system. The part had to withstand real-world testing conditions and interface perfectly with existing components."
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_1.jpg",
+        "caption": "CAD design of the prototype"
+      },
+      {
+        "type": "subheader",
+        "content": "Material Selection"
+      },
+      {
+        "type": "text",
+        "content": "We printed this part in ABS for its superior strength and heat resistance. The material choice was critical for the prototype to accurately represent the final production part's behavior."
+      },
+      {
+        "type": "subheader",
+        "content": "Iterative Process"
+      },
+      {
+        "type": "text",
+        "content": "The project required multiple iterations to perfect the tolerances, but the final result fit perfectly into the assembly. This prototype saved the client weeks of development time and significant costs compared to traditional manufacturing methods."
+      }
+    ]
+  },
+  {
+    "id": "artistic-sculpture",
+    "title": "Artistic Sculpture Commission",
+    "date": "2024-10-22",
+    "excerpt": "Bringing a digital art piece into the physical world through resin printing.",
+    "thumbnail": "dnd_mini_20251202_1.jpg",
+    "sections": [
+      {
+        "type": "header",
+        "content": "Artistic Vision"
+      },
+      {
+        "type": "text",
+        "content": "A local artist commissioned us to print their digital sculpture design. The piece was conceived as a purely digital artwork but the artist wanted to see it realized in physical form for gallery exhibition."
+      },
+      {
+        "type": "image",
+        "filename": "dnd_mini_20251202_1.jpg",
+        "caption": "Digital sculpture model"
+      },
+      {
+        "type": "subheader",
+        "content": "Resin Printing Excellence"
+      },
+      {
+        "type": "text",
+        "content": "Using resin printing, we were able to capture every nuance of their creative vision. The translucent resin gave the piece an ethereal quality, and the 0.025mm layer resolution meant that surface details were flawless."
+      },
+      {
+        "type": "subheader",
+        "content": "Final Result"
+      },
+      {
+        "type": "text",
+        "content": "The artist was thrilled with how their digital creation translated into a physical art piece that could be displayed in galleries. The sculpture has since been featured in several local exhibitions."
+      }
+    ]
+  }
+]
