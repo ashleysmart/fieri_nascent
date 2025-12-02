@@ -11,6 +11,8 @@ export default function FieriNascent() {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactError, setContactError] = useState(null);
   const [content, setContent] = useState(null);
   const [blogPosts, setBlogPosts] = useState(null);
 
@@ -53,10 +55,75 @@ export default function FieriNascent() {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+
+    if (isSubmitting) return;
+
+    // Validate form
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    let errors = [];
+    if (formData.name === null ||
+      formData.name === undefined ||
+      formData.name.length < 1) {
+      errors.push("Name is missing\n")
+    }
+    if (formData.email === null ||
+      formData.email === undefined ||
+      !emailRegex.test(formData.email)) {
+      errors.push("Email address appears bad\n")
+    }
+    if (formData.message === null ||
+      formData.message === undefined ||
+      formData.message.length < 5) {
+      errors.push("Message is too short\n")
+    }
+    if (errors.length > 0) {
+      setContactError(errors);
+      return;
+    }
+
+    setContactError(null);
+    setIsSubmitting(true);
+
+    const emailJSConfig = {
+      serviceID: 'fieri.nascent@gmail.com',
+      templateID: 'template_l3qm4eb',
+      publicKey: 'cTbDUgDego0NUJHa4'
+    };
+
+    try {
+      // Using EmailJS
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          service_id: emailJSConfig.serviceID,
+          template_id: emailJSConfig.templateID,
+          user_id: emailJSConfig.publicKey,
+          template_params: {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+            time: Date.now()
+          }
+        })
+      });
+
+      if (response.ok) {
+        alert('Thank you for your message! We will get back to you soon.');
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Sorry, there was an error sending your message. Please email us directly at fieri.nascent@gmail.com');
+    } finally {
+      setFormData({ name: '', email: '', message: '' });
+      //setIsSubmitting(false);
+    }
   };
 
   const navigateToSection = (section) => {
@@ -260,6 +327,8 @@ export default function FieriNascent() {
         <p className="section-subtitle">Let's discuss your next project</p>
 
         <div className="contact-form">
+          {contactError ? <pre style={{ color: 'red' }}>{contactError}</pre> : null}
+
           <div className="form-group">
             <label htmlFor="name" className="form-label">Name</label>
             <input
@@ -295,8 +364,12 @@ export default function FieriNascent() {
             />
           </div>
 
-          <button onClick={handleFormSubmit} className="btn form-submit">
-            Send Message
+          <button
+            onClick={handleFormSubmit}
+            className="btn form-submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'THANKS' : 'Send Message'}
           </button>
         </div>
       </div>
