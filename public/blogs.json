@@ -57,7 +57,23 @@
         "type": "image",
         "filename": "20250611_kitbash/kitbashing_20250611_3.jpg",
         "caption": ""
+      },
+
+      {
+        "type": "text",
+        "content": "A final look at the assembly in progress"
+      },
+      {
+        "type": "image",
+        "filename": "20250611_kitbash/kitbashing_20250611_7.jpg",
+        "caption": ""
+      },
+      {
+        "type": "image",
+        "filename": "20250611_kitbash/kitbashing_20250611_8.jpg",
+        "caption": ""
       }
+
     ]
   },
   {
@@ -92,11 +108,16 @@
     "title": "D&d mini set 2025-06",
     "date": "2025-06-25",
     "excerpt": "D&D gamers mini set",
-    "thumbnail": "20250625_dnd_mini/dnd_mini_20250625_1.jpg",
+    "thumbnail": "20250625_dnd_mini/dnd_mini_20250625_banner.jpg",
     "sections": [
       {
         "type": "header",
         "content": "D&d mini set"
+      },
+      {
+        "type": "image",
+        "filename": "20250625_dnd_mini/dnd_mini_20250625_banner.jpg",
+        "caption": "Hero mini - goblin archer squad"
       },
       {
         "type": "text",
