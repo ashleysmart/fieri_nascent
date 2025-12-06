@@ -268,7 +268,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2px;
-  background: rgba(255, 255, 255, 0.06);
 }
 
 .gallery-item {
@@ -319,7 +318,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2px;
-  background: rgba(255, 255, 255, 0.06);
 }
 
 .blog-card {
@@ -330,8 +328,8 @@ body {
 }
 
 .blog-card:hover {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .blog-image {

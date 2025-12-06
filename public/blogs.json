@@ -1,5 +1,82 @@
 [
   {
+    "id": "20251015_cosplay_ironman",
+    "title": "Cosplay - Iron Man helmet",
+    "date": "2025-08-01",
+    "excerpt": "Cosplay - Iron Man helmet",
+    "thumbnail": "20251015_cosplay_ironman/20251014_iromman_1.jpg",
+    "sections": [
+      {
+        "type": "header",
+        "content": "Cosplay - Iron Man helmet"
+      },
+      {
+        "type": "text",
+        "content": "A cosplay helmets printed in black PLA on an FDM printer"
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251014_iromman_1.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251014_ironman_2.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251014_ironman_3.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251015_cosplay_ironman_4.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251016_ironman_5.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251016_ironman_6.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251019_ironman_7.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251019_ironman_8.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251021_ironman_9.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251021_ironman_10.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251021_ironman_11.jpg",
+        "caption": ""
+      },
+      {
+        "type":  "image",
+        "filename": "20251015_cosplay_ironman/20251021_ironman_12.jpg",
+        "caption": ""
+      }
+    ]
+  },
+  {
     "id": "warhammer_kitbast_20250611",
     "title": "Warhammer 40k kit bash - Dreadnoughts",
     "date": "2025-06-11",
