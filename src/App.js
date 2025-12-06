@@ -133,7 +133,7 @@ function AppContent() {
           <Route path="/gallery" element={<Gallery blogPosts={blogPosts} imagePublicUrl={imagePublicUrl} />} />
           <Route path="/blog" element={<BlogList blogPosts={blogPosts} imagePublicUrl={imagePublicUrl} />} />
           <Route path="/blog/:id" element={<BlogPost blogPosts={blogPosts} imagePublicUrl={imagePublicUrl} />} />
-          <Route path="/images/:filename" element={<ImageViewer imagePublicUrl={imagePublicUrl} />} />
+          <Route path="/images/*" element={<ImageViewer imagePublicUrl={imagePublicUrl} />} />
           <Route path="/faq" element={<FAQ content={content} />} />
           <Route path="/contact" element={
             <Contact
@@ -470,8 +470,27 @@ function BlogPost({ blogPosts, imagePublicUrl }) {
 }
 
 function ImageViewer({ imagePublicUrl }) {
-  const { filename } = useParams();
+  const location = window.location.pathname;
+  const filename = location.replace('/images/', '');
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [filename]);
+
+  if (!filename) {
+    return (
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Image not found</h2>
+          <button onClick={() => navigate(-1)} className="btn">
+            ← Back
+          </button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="section">
@@ -481,18 +500,19 @@ function ImageViewer({ imagePublicUrl }) {
         </button>
 
         <div className="image-viewer-container">
-          <h2 className="section-title">{filename}</h2>
           <div className="image-viewer">
-            <img src={imagePublicUrl(filename)} alt={filename} />
+            {imageError ? (
+              <p>Error loading image: {imagePublicUrl(filename)}</p>
+            ) : (
+              <img
+                key={filename}
+                src={imagePublicUrl(filename)}
+                alt={decodeURIComponent(filename)}
+                onError={() => setImageError(true)}
+              />
+            )}
           </div>
           <div className="image-viewer-actions">
-            <a
-              href={imagePublicUrl(filename)}
-              download
-              className="btn"
-            >
-              Download Image
-            </a>
           </div>
         </div>
       </div>
