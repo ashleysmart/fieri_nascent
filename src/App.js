@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import logo from './logo.svg';
 import './App.css';
 
@@ -267,17 +268,64 @@ function Gallery({ blogPosts, imagePublicUrl }) {
   const page = parseInt(searchParams.get('page') || '1', 10);
   const imagesPerPage = 20;
 
-  // Collect all images from all blog posts
-  const allImages = blogPosts.flatMap(post =>
-    post.sections
-      .filter(section => section.type === 'image')
-      .map(section => ({
-        postId: post.id,
-        postTitle: post.title,
-        filename: section.filename,
-        caption: section.caption
-      }))
-  );
+  // Collect all images from all blog posts - now from markdown files
+  const [allImages, setAllImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      const images = [];
+
+      for (const post of blogPosts) {
+        if (post.markdownFile) {
+          try {
+            const response = await fetch(process.env.PUBLIC_URL + '/blogs/' + post.markdownFile);
+            const content = await response.text();
+
+            // Extract images from markdown using regex
+            const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+            let match;
+
+            while ((match = imageRegex.exec(content)) !== null) {
+              const caption = match[1];
+              const filename = match[2];
+
+              // Skip external URLs
+              if (!filename.startsWith('http')) {
+                images.push({
+                  postId: post.id,
+                  postTitle: post.title,
+                  filename: filename,
+                  caption: caption || post.title
+                });
+              }
+            }
+          } catch (err) {
+            console.error('Error loading markdown for gallery:', err);
+          }
+        }
+
+        // Fallback to sections if they exist
+        if (post.sections) {
+          post.sections
+            .filter(section => section.type === 'image')
+            .forEach(section => {
+              images.push({
+                postId: post.id,
+                postTitle: post.title,
+                filename: section.filename,
+                caption: section.caption
+              });
+            });
+        }
+      }
+
+      setAllImages(images);
+      setLoading(false);
+    };
+
+    loadImages();
+  }, [blogPosts]);
 
   const totalPages = Math.ceil(allImages.length / imagesPerPage);
   const startIndex = (page - 1) * imagesPerPage;
@@ -288,6 +336,17 @@ function Gallery({ blogPosts, imagePublicUrl }) {
     setSearchParams({ page: newPage.toString() });
     window.scrollTo(0, 0);
   };
+
+  if (loading) {
+    return (
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Gallery</h2>
+          <p>Loading images...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="section">
@@ -320,48 +379,50 @@ function Gallery({ blogPosts, imagePublicUrl }) {
           ))}
         </div>
 
-        <div className="pagination">
-          <button
-            onClick={() => handlePageChange(page - 1)}
-            disabled={page === 1}
-            className="pagination-btn"
-          >
-            ← Previous
-          </button>
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+              className="pagination-btn"
+            >
+              ← Previous
+            </button>
 
-          <div className="pagination-info">
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              let pageNum;
-              if (totalPages <= 5) {
-                pageNum = i + 1;
-              } else if (page <= 3) {
-                pageNum = i + 1;
-              } else if (page >= totalPages - 2) {
-                pageNum = totalPages - 4 + i;
-              } else {
-                pageNum = page - 2 + i;
-              }
+            <div className="pagination-info">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum;
+                if (totalPages <= 5) {
+                  pageNum = i + 1;
+                } else if (page <= 3) {
+                  pageNum = i + 1;
+                } else if (page >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i;
+                } else {
+                  pageNum = page - 2 + i;
+                }
 
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={`pagination-number ${page === pageNum ? 'active' : ''}`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`pagination-number ${page === pageNum ? 'active' : ''}`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === totalPages}
+              className="pagination-btn"
+            >
+              Next →
+            </button>
           </div>
-
-          <button
-            onClick={() => handlePageChange(page + 1)}
-            disabled={page === totalPages}
-            className="pagination-btn"
-          >
-            Next →
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );
@@ -402,7 +463,36 @@ function BlogList({ blogPosts, imagePublicUrl }) {
 function BlogPost({ blogPosts, imagePublicUrl }) {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [markdownContent, setMarkdownContent] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const post = blogPosts.find(p => p.id === id);
+
+  useEffect(() => {
+    if (!post || !post.markdownFile) {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    fetch(process.env.PUBLIC_URL + '/blogs/' + post.markdownFile)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load markdown file');
+        return res.text();
+      })
+      .then(content => {
+        setMarkdownContent(content);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading markdown:', err);
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [post]);
 
   if (!post) {
     return (
@@ -417,35 +507,31 @@ function BlogPost({ blogPosts, imagePublicUrl }) {
     );
   }
 
-  const renderBlogSection = (section, index) => {
-    switch (section.type) {
-      case 'header':
-        return <h2 key={index} className="blog-section-header">{section.content}</h2>;
-      case 'subheader':
-        return <h3 key={index} className="blog-section-subheader">{section.content}</h3>;
-      case 'text':
-        return <p key={index} className="blog-section-text">{section.content}</p>;
-      case 'image':
-        const url = imagePublicUrl(section.filename);
-        return (
-          <figure key={index} className="blog-section-image">
-            <Link to={`/images/${section.filename}`}>
-              <img src={url} alt={section.caption || ''} />
-            </Link>
-            {section.caption && <figcaption>{section.caption}</figcaption>}
-          </figure>
-        );
-      case 'image_url':
-        return (
-          <figure key={index} className="blog-section-image">
-            <img src={section.url} alt={section.caption || ''} />
-            {section.caption && <figcaption>{section.caption}</figcaption>}
-          </figure>
-        );
-      default:
-        return null;
-    }
-  };
+  if (loading) {
+    return (
+      <section className="section">
+        <div className="container-narrow">
+          <button onClick={() => navigate('/blog')} className="back-button">
+            ← Back to Blog
+          </button>
+          <p>Loading...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="section">
+        <div className="container-narrow">
+          <button onClick={() => navigate('/blog')} className="back-button">
+            ← Back to Blog
+          </button>
+          <p>Error loading blog post: {error}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="section">
@@ -460,8 +546,23 @@ function BlogPost({ blogPosts, imagePublicUrl }) {
             <h1 className="blog-detail-title">{post.title}</h1>
           </div>
 
-          <div className="blog-detail-content">
-            {post.sections.map((section, index) => renderBlogSection(section, index))}
+          <div className="blog-detail-content markdown-content">
+            <ReactMarkdown
+              components={{
+                img: ({node, ...props}) => {
+                  const src = props.src?.startsWith('http')
+                    ? props.src
+                    : imagePublicUrl(props.src);
+                  return (
+                    <Link to={`/images/${props.src}`} className="markdown-image-link">
+                      <img {...props} src={src} alt={props.alt || ''} />
+                    </Link>
+                  );
+                }
+              }}
+            >
+              {markdownContent}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
@@ -500,6 +601,7 @@ function ImageViewer({ imagePublicUrl }) {
         </button>
 
         <div className="image-viewer-container">
+          <h2 className="section-title">{decodeURIComponent(filename)}</h2>
           <div className="image-viewer">
             {imageError ? (
               <p>Error loading image: {imagePublicUrl(filename)}</p>
@@ -513,6 +615,13 @@ function ImageViewer({ imagePublicUrl }) {
             )}
           </div>
           <div className="image-viewer-actions">
+            <a
+              href={imagePublicUrl(filename)}
+              download
+              className="btn"
+            >
+              Download Image
+            </a>
           </div>
         </div>
       </div>
