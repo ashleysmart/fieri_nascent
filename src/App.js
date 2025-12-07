@@ -6,7 +6,6 @@ import './App.css';
 
 function AppContent() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedBlog, setSelectedBlog] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -601,7 +600,6 @@ function ImageViewer({ imagePublicUrl }) {
         </button>
 
         <div className="image-viewer-container">
-          <h2 className="section-title">{decodeURIComponent(filename)}</h2>
           <div className="image-viewer">
             {imageError ? (
               <p>Error loading image: {imagePublicUrl(filename)}</p>
@@ -615,13 +613,6 @@ function ImageViewer({ imagePublicUrl }) {
             )}
           </div>
           <div className="image-viewer-actions">
-            <a
-              href={imagePublicUrl(filename)}
-              download
-              className="btn"
-            >
-              Download Image
-            </a>
           </div>
         </div>
       </div>
